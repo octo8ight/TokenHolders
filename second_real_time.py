@@ -27,7 +27,7 @@ def get_transaction_detail(tx_signature, wallet):
                     difference_time = datetime.now() - trans_time
                     difference_time = difference_time.total_seconds() / 60
                     if difference_time <= 5:
-                        print('wallet:  ', wallet)
+                        print('wallet:  ', wallet + "     " + datetime.now())
 
 def check_transactions(wallet):
     response = requests.post(

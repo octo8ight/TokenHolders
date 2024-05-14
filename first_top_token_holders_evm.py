@@ -6,7 +6,7 @@ today = date.today()
 
 query_template = '''
 {
-  Solana(dataset: archive, network: solana) {
+  EVM(dataset: archive, network: eth) {
     TokenHolders(
       date: "%s"
       tokenSmartContract: "%s"
@@ -26,7 +26,7 @@ query_template = '''
 
 url = 'https://streaming.bitquery.io/graphql'
 
-token_contract = "2EBjqPYGLUExdWwJJRLqtGPawzb2aMjE1wTpUYKhy2UQ"
+token_contract = "0xdAC17F958D2ee523a2206206994597C13D831ec7"
 
 data_contract1 = {}
 
@@ -49,6 +49,5 @@ headers = {
 response = requests.post(url, json={'query': formatted_query}, headers=headers)
 data = response.json()
 
-print(data)
-# with open('wallets.json', 'w') as f:
-#     json.dump(data['data']['EVM']['TokenHolders'], f)
+with open('wallets.json', 'w') as f:
+    json.dump(data['data']['EVM']['TokenHolders'], f)
