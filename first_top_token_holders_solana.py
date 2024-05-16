@@ -16,8 +16,28 @@ headers = {
 
 response = requests.post(url, json=payload, headers=headers)
 data = response.json()
-print(data['result']['value'])
+tokenHolders = []
+
+lists = data['result']['value']
+index = 0
+for item in lists:
+    payload1 = {
+        "id": 1,
+        "jsonrpc": "2.0",
+        "method": "getAccountInfo",
+        "params": [
+            item['address'],
+            {
+                "encoding": "jsonParsed",
+                "commitment": "finalized"
+            }
+        ]
+    }
+    res = requests.post(url, headers=headers, json=payload1)
+    data1 = res.json()
+    tokenHolders.insert(index, {"address": data1['result']['value']['data']['parsed']['info']['owner'], 'amount': data1['result']['value']['data']['parsed']['info']['tokenAmount']['amount']})
+    index += 1
 # print(response.json())
 
 with open('wallets.json', 'w') as f:
-    json.dump(data['result']['value'], f)
+    json.dump(tokenHolders, f)
