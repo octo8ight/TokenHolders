@@ -35,6 +35,7 @@ for item in lists:
     }
     res = requests.post(url, headers=headers, json=payload1)
     data1 = res.json()
+    print(data1)
     tokenHolders.insert(index, {"address": data1['result']['value']['data']['parsed']['info']['owner'], 'amount': data1['result']['value']['data']['parsed']['info']['tokenAmount']['amount']})
     index += 1
 # print(response.json())

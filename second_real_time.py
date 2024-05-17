@@ -15,20 +15,23 @@ def get_transaction_detail(tx_signature, wallet):
         "https://api.mainnet-beta.solana.com", 
         headers = {"Content-Type": "application/json"}, 
         json={"jsonrpc":"2.0","id":1, "method": "getConfirmedTransaction", 
-              "params": [tx_signature, "jsonParsed"]}
+              "params": [tx_signature, {"encoding": "jsonParsed","maxSupportedTransactionVersion":0}]}
     )
     
     result = json.loads(response.text)
 
     if 'result' in result:
+        print(wallet, '   ', tx_signature)
         if result['result']['meta']['err'] == None:
+            print('ok')
             if 'transaction' in result['result'] and 'message' in result['result']['transaction'] and 'accountKeys' in result['result']['transaction']['message']:
                 for item in result['result']['transaction']['message']['accountKeys']:
                     if item['pubkey'] == token_contract:
                         trans_time = datetime.fromtimestamp(result['result']['blockTime'])
                         difference_time = datetime.now() - trans_time
                         difference_time = difference_time.total_seconds() / 60
-                        if difference_time <= 5:
+                        print('wallet:  ', wallet, "       ", trans_time)
+                        if difference_time <= 45:
                             print('wallet:  ', wallet, "       ", trans_time)
                             break
                         break
