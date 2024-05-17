@@ -28,7 +28,6 @@ def get_transaction_detail(tx_signature, wallet):
                         trans_time = datetime.fromtimestamp(result['result']['blockTime'])
                         difference_time = datetime.now() - trans_time
                         difference_time = difference_time.total_seconds() / 60
-                        print('wallet:  ', wallet, "       ", trans_time)
                         if difference_time <= 5:
                             print('wallet:  ', wallet, "       ", trans_time)
                             break
