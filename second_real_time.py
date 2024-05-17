@@ -21,9 +21,7 @@ def get_transaction_detail(tx_signature, wallet):
     result = json.loads(response.text)
 
     if 'result' in result:
-        print(wallet, '   ', tx_signature)
         if result['result']['meta']['err'] == None:
-            print('ok')
             if 'transaction' in result['result'] and 'message' in result['result']['transaction'] and 'accountKeys' in result['result']['transaction']['message']:
                 for item in result['result']['transaction']['message']['accountKeys']:
                     if item['pubkey'] == token_contract:
