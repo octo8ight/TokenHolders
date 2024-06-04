@@ -63,4 +63,4 @@ def checkTokenAmountInWallet():
 
 while True:
     checkTokenAmountInWallet()
-    time.sleep(60*3)
+    time.sleep(60*10)
