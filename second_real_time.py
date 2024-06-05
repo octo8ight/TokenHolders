@@ -56,7 +56,7 @@ def checkTokenAmountInWallet():
         pastAmount = findWalletAndAmount(data=data, address=wallet['address'])
         newAmount = wallet['amount']
         if pastAmount != newAmount and wallet['address'] != '5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1':
-            print(wallet['address'] + 'birb token balance changed.   changed amount: ' + abs(newAmount - pastAmount))
+            print(wallet['address'] + 'birb token balance changed.   changed amount: ' + abs(int(newAmount) - int(pastAmount)))
 
     with open('wallets.json', 'w') as f:
         json.dump(newData, f)
