@@ -52,15 +52,17 @@ def checkTokenAmountInWallet():
         data = json.load(f)
 
     newData = getLargetTokenHoldersWallet()
+
+    with open('wallets.json', 'w') as f:
+        json.dump(newData, f)
+
     for wallet in newData:
         pastAmount = findWalletAndAmount(data=data, address=wallet['address'])
         newAmount = wallet['amount']
         amount = round((int(newAmount) - int(pastAmount)) / (10 ** 9), 2)
-        if pastAmount != newAmount and wallet['address'] != '5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1':
-            print(wallet['address'] + 'birb token balance changed.   changed amount: ' + str(amount) + ' out of ' + newAmount + ' total.')
-
-    with open('wallets.json', 'w') as f:
-        json.dump(newData, f)
+        total = round(int(newAmount) / (10 ** 9), 2)
+        if amount != 0 and wallet['address'] != '5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1':
+            print(wallet['address'] + 'birb token balance changed.   changed amount: ' + str(amount) + ' out of ' + str(total) + ' total.')
 
 while True:
     checkTokenAmountInWallet()
