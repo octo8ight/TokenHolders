@@ -55,7 +55,7 @@ def checkTokenAmountInWallet():
     for wallet in newData:
         pastAmount = findWalletAndAmount(data=data, address=wallet['address'])
         newAmount = wallet['amount']
-        amount = abs(int(newAmount) - int(pastAmount))
+        amount = round(abs(int(newAmount) - int(pastAmount)) / (10 ** 9), 2)
         if pastAmount != newAmount and wallet['address'] != '5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1':
             print(wallet['address'] + 'birb token balance changed.   changed amount: ' + str(amount))
 
